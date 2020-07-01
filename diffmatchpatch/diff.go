@@ -1160,16 +1160,16 @@ func (dmp *DiffMatchPatch) DiffXIndex(diffs []Diff, loc int) int {
 func (dmp *DiffMatchPatch) DiffPrettyHtml(diffs []Diff) string {
 	var buff bytes.Buffer
 	for _, diff := range diffs {
-		text := strings.Replace(html.EscapeString(diff.Text), "\n", "&para;<br>", -1)
+		text := strings.Replace(html.EscapeString(diff.Text), "\n", "&#8626;<br>", -1)
 		switch diff.Type {
 		case DiffInsert:
-			_, _ = buff.WriteString("<ins style=\"background:#e6ffe6;\">")
+			_, _ = buff.WriteString("<span class='webix_docmanager_diff_insert'>")
 			_, _ = buff.WriteString(text)
-			_, _ = buff.WriteString("</ins>")
+			_, _ = buff.WriteString("</span>")
 		case DiffDelete:
-			_, _ = buff.WriteString("<del style=\"background:#ffe6e6;\">")
+			_, _ = buff.WriteString("<span class='webix_docmanager_diff_remove'>")
 			_, _ = buff.WriteString(text)
-			_, _ = buff.WriteString("</del>")
+			_, _ = buff.WriteString("</span>")
 		case DiffEqual:
 			_, _ = buff.WriteString("<span>")
 			_, _ = buff.WriteString(text)
